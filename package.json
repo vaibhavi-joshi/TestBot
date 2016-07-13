@@ -1,0 +1,26 @@
+{
+  "name": "testbot",
+  "version": "1.0.0",
+  "description": "For lab Poc",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm --help"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vaibhavi-joshi/TestBot.git"
+  },
+  "keywords": [
+    "bot"
+  ],
+  "author": "vaibhavi-joshi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vaibhavi-joshi/TestBot/issues"
+  },
+  "homepage": "https://github.com/vaibhavi-joshi/TestBot#readme",
+  "dependencies": {
+    "botbuilder": "^1.0.1",
+    "restify": "^4.1.1"
+  }
+}
