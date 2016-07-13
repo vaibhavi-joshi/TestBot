@@ -5,7 +5,7 @@ var request = require('request');
 //=========================================================
 // HRMS varibale
 //=========================================================
-var host = "14.141.118.75";
+var host = "http://14.141.118.75";
 var base_url = "/mobile/hrms_web_services/services/index.php?";
 
 
@@ -81,7 +81,7 @@ bot.dialog('/login',[ function (session) {
 				//set received token and emp_num to program vars for future work
 				sessionID = token;
 				emp_number = emp_num;
-             	session.endDialog('Now you can ask HRMS questions!'); //For BotconnectorBot
+             	session.endDialog(); //For BotconnectorBot
 			 // session.replaceDialog('/',dialog); //For Textbot to test scenario
 			  
 			}
@@ -94,11 +94,11 @@ bot.dialog('/login',[ function (session) {
 			var choice = results.response.entity;
 			//console.log('choice entered = %s', choice);
 			if(choice == "yes") {
-				session.endDialog('Your Login session will be Restarted');
+				session.endDialog();
 				session.beginDialog("/login");
 			}
 			else {
-				session.endDialog('Your Login session is now closed');		
+				session.endDialog();		
 			}
 		}	
 	}
@@ -163,21 +163,12 @@ var options = {
 request(options, function (error, response, body) {
 
    console.log("received resonse from HRMS"); // Show the HTML for the Google homepage.
-   var jsonData = null;
+   var jsonData = JSON.parse(body);
 
-   try {
-        console.log("josn parsing try block");
-      jsonData = JSON.parse(body);
-      console.log("jsond data is assigned");
-
-  } catch (e) {
-
-    console.log("josn parsing catch block");
-     console.log(e);
-  }
    console.log("josn parsing is done");
    if (jsonData.error)
    {
+         console.log("josn data error");
         console.log('Error = ', jsonData.message);
 		err = jsonData.message;
         callback(t, emp, err);
