@@ -112,7 +112,7 @@ bot.dialog('/login',[ function (session) {
 //dialog.on('CheckLeave', builder.DialogAction.send("Next Holiday is 'Independence Day' on Monday, July 04 2016. Happy Holiday!"));
 dialog.matches('CheckLeave', [function (session) {
 if (sessionID != null && emp_number != null) {
-       session.send("your previous session is still alive, you can continue with HRMS Task..ask for check leave balance");
+     //  session.send("your previous session is still alive, you can continue with HRMS Task..ask for check leave balance");
         
          checkLeaveBalance(function (leave_count,error) {
 
