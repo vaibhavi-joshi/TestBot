@@ -5,7 +5,7 @@ var request = require('request');
 //=========================================================
 // HRMS varibale
 //=========================================================
-var host = "http://10.12.40.86";
+var host = "14.141.118.75";
 var base_url = "/mobile/hrms_web_services/services/index.php?";
 
 
