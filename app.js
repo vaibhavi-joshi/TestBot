@@ -7,7 +7,7 @@ var builder = require('botbuilder');
 // Setup Restify Server
 var server = restify.createServer();
 var bot = new builder.UniversalBot(connector);
-
+var port = process.env.PORT || 8082;
 
 //var connector = new builder.ConsoleConnector().listen();
 // Create chat bot
@@ -17,7 +17,7 @@ var connector = new builder.ChatConnector({
 });
 
 server.post('/v1/messages', connector.listen());
-server.listen(8080, function () {
+server.listen(port, function () {
    console.log('%s listening to %s', server.name, server.url); 
 });
 
