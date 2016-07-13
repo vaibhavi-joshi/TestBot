@@ -48,10 +48,11 @@ var dialog = new builder.IntentDialog({ recognizers: [recognizer] });
 //=========================================================
 bot.dialog('/', dialog);
 
+bot.s
+
 bot.dialog('/login',[ function (session) {
         username = null;
         password = null;
-        session.reset('/login');
 		builder.Prompts.text(session, 'Enter your username and password for login. First Enter your username.');
 	},
 	function (session, results, next) {
