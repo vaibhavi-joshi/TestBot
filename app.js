@@ -163,7 +163,15 @@ var options = {
 request(options, function (error, response, body) {
 
    console.log("received resonse from HRMS"); // Show the HTML for the Google homepage.
-   var jsonData = JSON.parse(body);
+   var jsonData = null;
+
+   try {
+        console.log("josn parsing try block");
+      jsonData = JSON.parse(body);
+  } catch (e) {
+      
+    return console.error(e);
+  }
    console.log("josn parsing is done");
    if (jsonData.error)
    {
