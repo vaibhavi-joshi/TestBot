@@ -22,18 +22,18 @@ var current_leave_count = null;
 var server = restify.createServer();
 var port = process.env.PORT || 8082;
 
-//var connector = new builder.ConsoleConnector().listen();
+var connector = new builder.ConsoleConnector().listen();
 // Create chat bot
-var connector = new builder.ChatConnector({
-    appId: 'ceef4aa2-21d2-43d8-a1f3-d7250bec3dfc',
-    appPassword: 'MJNhfc9iUbdjAHKemj7Fmkq'
-});
+// var connector = new builder.ChatConnector({
+//     appId: 'ceef4aa2-21d2-43d8-a1f3-d7250bec3dfc',
+//     appPassword: 'MJNhfc9iUbdjAHKemj7Fmkq'
+// });
 var bot = new builder.UniversalBot(connector);
 
-server.post('/api/messages', connector.listen());
-server.listen(port, function () {
-   console.log('%s listening to %s', server.name, server.url); 
-});
+// server.post('/api/messages', connector.listen());
+// server.listen(port, function () {
+//    console.log('%s listening to %s', server.name, server.url); 
+// });
 
 //=========================================================
 // Luis Setup
@@ -168,9 +168,12 @@ request(options, function (error, response, body) {
    try {
         console.log("josn parsing try block");
       jsonData = JSON.parse(body);
+      console.log("jsond data is assigned");
+
   } catch (e) {
-      
-    return console.error(e);
+
+    console.log("josn parsing catch block");
+     console.log(e);
   }
    console.log("josn parsing is done");
    if (jsonData.error)
