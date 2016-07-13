@@ -68,13 +68,15 @@ bot.dialog('/login',[ function (session) {
 	
 
         //Call login API of HRMS with user Input
-        login(username, password,function (token, emp_num, err) {
+        login(username, password, function (token, emp_num, err) {
 		
+         console.log('login call back is called');
 			if(token == null) {
+                  console.log('something is wrong');
 				builder.Prompts.choice(session, "Something went wrong while logging in. Retry?", ["yes", "no"]);
 			}
 			else {
-                console.log('Login  Callback is called successful')
+                console.log('Login  Callback is called successful');
                 session.send('You are now logged into HRMS');
 				//set received token and emp_num to program vars for future work
 				sessionID = token;
@@ -116,7 +118,7 @@ if (sessionID != null && emp_number != null) {
 
 					if (error == null)
 					{
-						session.send('Your available leave balance is = %s',leave_count)
+						session.send('Your available leave balance is = %s',leave_count);
 					}
 					else
 					{
@@ -160,7 +162,7 @@ var options = {
 
 request(options, function (error, response, body) {
 
-   // console.log(body) // Show the HTML for the Google homepage.
+   console.log("received resonse from HRMS"); // Show the HTML for the Google homepage.
    var jsonData = JSON.parse(body);
    if (jsonData.error)
    {
@@ -177,7 +179,7 @@ request(options, function (error, response, body) {
    }
 	
 });
-
+ console.log('waiting for response');
  }
 
 //=========================================================
@@ -205,7 +207,7 @@ request(options, function (error, response, body) {
    else{
 		current_leave_count = jsonData.leave_count;
 	//	console.log('your leave balance is = ', current_leave_count);	
-		callback(current_leave_count,null)
+		callback(current_leave_count,null);
 		
    }
 	
