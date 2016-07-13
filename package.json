@@ -1,8 +1,13 @@
 {
-  "name": "testbot",
+  "name": "ilsi",
   "version": "1.0.0",
-  "description": "For lab Poc",
-  "main": "index.js",
+  "description": "For lab poc",
+  "main": "app.js",
+  "dependencies": {
+    "botbuilder": "^3.0.1",
+    "restify": "^4.1.1"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "npm --help"
   },
@@ -18,9 +23,5 @@
   "bugs": {
     "url": "https://github.com/vaibhavi-joshi/TestBot/issues"
   },
-  "homepage": "https://github.com/vaibhavi-joshi/TestBot#readme",
-  "dependencies": {
-    "botbuilder": "^1.0.1",
-    "restify": "^4.1.1"
-  }
+  "homepage": "https://github.com/vaibhavi-joshi/TestBot#readme"
 }
