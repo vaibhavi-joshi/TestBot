@@ -51,7 +51,7 @@ bot.dialog('/', dialog);
 bot.dialog('/login',[ function (session) {
         username = null;
         password = null;
-        session.reset('/')
+        session.reset('/login');
 		builder.Prompts.text(session, 'Enter your username and password for login. First Enter your username.');
 	},
 	function (session, results, next) {
