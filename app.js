@@ -88,7 +88,7 @@ bot.dialog('/login',[ function (session) {
  function (session, results) {
 
 		if(results.response) {
-			var choice = results.response.entity;
+			var choice = results.response;
 			//console.log('choice entered = %s', choice);
 			if(choice == "yes") {
 				session.endDialog();
