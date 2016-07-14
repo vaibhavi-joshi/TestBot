@@ -87,7 +87,7 @@ bot.dialog('/login',[ function (session) {
 		}
 		); 
  },
- function (session, results) {
+ function (session, results,next) {
 
 		if(results.response) {
 			var choice = results.response.entity;
