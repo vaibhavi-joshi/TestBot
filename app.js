@@ -48,8 +48,6 @@ var dialog = new builder.IntentDialog({ recognizers: [recognizer] });
 //=========================================================
 bot.dialog('/', dialog);
 
-bot.s
-
 bot.dialog('/login',[ function (session) {
         username = null;
         password = null;
@@ -72,7 +70,6 @@ bot.dialog('/login',[ function (session) {
 		
          console.log('login call back is called');
 			if(token == null) {
-                  console.log('something is wrong');
 				builder.Prompts.choice(session, "Something went wrong while logging in. Retry?", ["yes", "no"]);
 			}
 			else {
@@ -123,6 +120,7 @@ if (sessionID != null && emp_number != null) {
 					else
 					{
 							session.send('Something went wrong while checking for your leave balance, please try after sometime.');
+                          //  session.endDialog();
 					}
 			});
    }//end elseif
@@ -139,6 +137,19 @@ dialog.matches('CheckHoliday',function (session, args) {
 //	console.log('holiday detected');
     session.send("Next Holiday is 'Independece Day' on Monday July 04 2016");
 });
+
+
+dialog.matches('logout',function (session, args) {
+
+	console.log('It might take while..please wait');
+    username = null;
+    password = null;
+    sessionID = null;
+    emp_number = null;
+    current_leave_count = null;
+    session.send("You are now logged out!")
+});
+
 
  dialog.onDefault(builder.DialogAction.send("I'm sorry. I didn't understand."));
 
