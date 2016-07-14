@@ -70,7 +70,8 @@ bot.dialog('/login',[ function (session) {
 		
          console.log('login call back is called');
 			if(token == null) {
-				builder.Prompts.choice(session, "Something went wrong while logging in. Retry?", ["yes", "no"]);
+				builder.Prompts.choice(session, "Something went wrong while logging in. Retry?", ["yes","no"]);
+                //builder.Prompts.choice(session, "Which color?", ["red","green","blue"]);
 			}
 			else {
                 console.log('Login  Callback is called successful');
