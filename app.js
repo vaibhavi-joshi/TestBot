@@ -70,7 +70,7 @@ bot.dialog('/login',[ function (session) {
 		
          console.log('login call back is called');
 			if(token == null) {
-				builder.Prompts.choice(session, "Something went wrong while logging in. Retry?", "yes|no");
+				builder.Prompts.choice(session, "Something went wrong while logging in. Retry?", ["yes","no"]);
                 next();
                 //builder.Prompts.choice(session, "Which color?", ["red","green","blue"]);
 			}
@@ -87,7 +87,7 @@ bot.dialog('/login',[ function (session) {
 		}
 		); 
  },
- function (session, results,next) {
+ function (session, results) {
 
 		if(results.response) {
 			var choice = results.response.entity;
