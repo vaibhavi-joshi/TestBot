@@ -123,7 +123,10 @@ dialog.matches('CheckLeave', [
             }
     },
     function (session,results) {
-              checkLeaveBalance(function (leave_count,error) {
+
+        if (sessionID != null && emp_number !=null)
+        {
+                 checkLeaveBalance(function (leave_count,error) {
 
                                 if (error == null)
                                 {
@@ -136,6 +139,9 @@ dialog.matches('CheckLeave', [
                                     //  session.endDialog();
                                 }
                         });   
+        }
+    
+             
     }   
 ]);
 
