@@ -94,8 +94,9 @@ bot.dialog('/login',[ function (session) {
 			var choice = results.response;
 			//console.log('choice entered = %s', choice);
 			if(choice == "yes") {
-				session.endDialog();
-				session.beginDialog("/login");
+				// session.endDialog();
+				//session.beginDialog("/login");
+                session.replaceDialog("/login");
 			}
 			else {
 				session.endDialog();		
