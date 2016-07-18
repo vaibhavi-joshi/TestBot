@@ -73,7 +73,7 @@ bot.dialog('/login',[ function (session) {
 			if(token == null) {
 				builder.Prompts.text(session, 'Something went wrong while logging in. Retry? ans in yes or no');
              //   builder.Prompts.choice
-             next();
+           
 			}
 			else {
                 console.log('Login  Callback is called successful');
