@@ -22,18 +22,19 @@ var current_leave_count = null;
 var server = restify.createServer();
 var port = process.env.PORT || 8082;
 
-//var connector = new builder.ConsoleConnector().listen();
+var connector = new builder.ConsoleConnector().listen();
 // Create chat bot
-var connector = new builder.ChatConnector({
-    appId: 'ceef4aa2-21d2-43d8-a1f3-d7250bec3dfc',
-    appPassword: 'MJNhfc9iUbdjAHKemj7Fmkq'
-});
+
+// var connector = new builder.ChatConnector({
+//     appId: 'ceef4aa2-21d2-43d8-a1f3-d7250bec3dfc',
+//     appPassword: 'MJNhfc9iUbdjAHKemj7Fmkq'
+// });
 var bot = new builder.UniversalBot(connector);
 
-server.post('/api/messages', connector.listen());
-server.listen(port, function () {
-   console.log('%s listening to %s', server.name, server.url); 
-});
+// server.post('/api/messages', connector.listen());
+// server.listen(port, function () {
+//    console.log('%s listening to %s', server.name, server.url); 
+// });
 
 //=========================================================
 // Luis Setup
@@ -46,7 +47,7 @@ var dialog = new builder.IntentDialog({ recognizers: [recognizer] });
 //=========================================================
 // Bots Dialogs
 //=========================================================
-bot.dialog('/', dialog);
+bot.dialog('/',dialog);
 
 bot.dialog('/login',[ function (session) {
         username = null;
@@ -71,6 +72,8 @@ bot.dialog('/login',[ function (session) {
          console.log('login call back is called');
 			if(token == null) {
 				builder.Prompts.text(session, 'Something went wrong while logging in. Retry? ans in yes or no');
+             //   builder.Prompts.choice
+             next();
 			}
 			else {
                 console.log('Login  Callback is called successful');
@@ -107,31 +110,36 @@ bot.dialog('/login',[ function (session) {
 //=========================================================
 
 //dialog.on('CheckLeave', builder.DialogAction.send("Next Holiday is 'Independence Day' on Monday, July 04 2016. Happy Holiday!"));
-dialog.matches('CheckLeave', [function (session) {
-if (sessionID != null && emp_number != null) {
-     //  session.send("your previous session is still alive, you can continue with HRMS Task..ask for check leave balance");
-        
-         checkLeaveBalance(function (leave_count,error) {
+dialog.matches('CheckLeave', [
+    function (session,results,next) {
+            if (sessionID == null && emp_number == null) {
+                    
+                     session.beginDialog('/login');
+            } //end elseif
+            else
+            {
+               next();           
+            }
+    },
+    function (session,results) {
+              checkLeaveBalance(function (leave_count,error) {
 
-					if (error == null)
-					{
-						session.send('Your available leave balance is = %s',leave_count);
-					}
-					else
-					{
-							session.send('Something went wrong while checking for your leave balance, please try after sometime.');
-                          //  session.endDialog();
-					}
-			});
-   }//end elseif
-   else
-   {
-     session.beginDialog('/login'); 
-   }
-}]
+                                if (error == null)
+                                {
+                                    session.send('Your available leave balance is = %s',leave_count);
+                            
+                                }
+                                else
+                                {
+                                        session.send('Something went wrong while checking for your leave balance, please try after sometime.');
+                                    //  session.endDialog();
+                                }
+                        });   
+    }   
+]);
 
 
-);
+
 dialog.matches('CheckHoliday',function (session, args) {
 
 //	console.log('holiday detected');
@@ -152,7 +160,7 @@ dialog.matches('logout',function (session, args) {
 
 
  dialog.onDefault(builder.DialogAction.send("I'm sorry. I didn't understand."));
-
+ 
 
 //=========================================================
 // User defined Function Login
@@ -230,3 +238,23 @@ request(options, function (error, response, body) {
 });
 
 }
+
+
+//  function (session,results,next) {
+//             if (sessionID != null && emp_number != null) {
+//                 //  session.send("your previous session is still alive, you can continue with HRMS Task..ask for check leave balance");
+              
+//                     next();
+//             } //end elseif
+//             else
+//             {
+//                 session.beginDialog('/login');
+                
+//             //         dialog.dialogResumed = function (session,result) {
+                
+//             //        session.send("This is resumed");
+                
+//             //    }
+                
+//             }
+//     },
