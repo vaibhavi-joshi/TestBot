@@ -5,8 +5,8 @@ var request = require('request');
 //=========================================================
 // HRMS varibale
 //=========================================================
-var host = "http://14.141.118.75";
-var base_url = "/mobile/hrms_web_services/services/index.php?";
+var host = "http://";
+var base_url = "/mobile/_web_services/services/index.php?";
 
 
 var sessionID = null;
@@ -26,8 +26,8 @@ var port = process.env.PORT || 8082;
 // Create chat bot
 
 var connector = new builder.ChatConnector({
-    appId: 'ceef4aa2-21d2-43d8-a1f3-d7250bec3dfc',
-    appPassword: 'MJNhfc9iUbdjAHKemj7Fmkq'
+    appId: '',
+    appPassword: ''
 });
 var bot = new builder.UniversalBot(connector);
 
@@ -40,7 +40,7 @@ server.listen(port, function () {
 // Luis Setup
 //=========================================================
 
-var recognizer = new builder.LuisRecognizer('https://api.projectoxford.ai/luis/v1/application?id=814f9a05-0e84-41f4-aec9-f205211b3a46&subscription-key=0d6df140e73b4f07a204058a0769d60e');
+var recognizer = new builder.LuisRecognizer('https://api.projectoxford.ai/luis/v1/application?id=&subscription-key=');
 var dialog = new builder.IntentDialog({ recognizers: [recognizer] });
 
 
@@ -218,8 +218,7 @@ request(options, function (error, response, body) {
 //=========================================================
 
 function checkLeaveBalance(callback){
-   // http://10.12.40.86/mobile/hrms_web_services/services/index.php?data={"method":"fetch_leave_count_by_type","params":{"user_id":"11311","leave_type":"LTY001","token":"Receivedfromloginresponse"}}
- var propertiesObject =  "data={\"method\":\"fetch_leave_count_by_type\",\"params\":{\"user_id\":\"" +emp_number+ "\",\"leave_type\":\"LTY001\",\"token\":\"" +sessionID+ "\"}}"    
+ var propertiesObject =  "data={\"method\":\"fetch_leave_count_by_type\",\"params\":{\"user_id\":\"" +emp_number+ "\",\"leave_type\":\"\",\"token\":\"" +sessionID+ "\"}}"    
 
 var options = {
   uri: host+base_url+propertiesObject
